@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Algoritmo_Barbiere/Algoritmo_Barbiere.csproj" Id="5c6c9cf4-a3fb-4805-89fe-edbe850e08b9" />
+  <Project Path="CONCURRENT_COMPUTING/CONCURRENT_COMPUTING.csproj" />
+  <Project Path="ProduttoreConsumatoreFIFO/ProduttoreConsumatoreFIFO.csproj" Id="dba05f80-4432-4e9d-b18b-685587f6169c" />
+  <Project Path="ProduttoreConsumatoreLIFO/ProduttoreConsumatoreLIFO.csproj" Id="ce1766d6-a99e-4231-89e6-206e5005ee19" />
+  <Project Path="Produttore_Consumatore/Produttore_Consumatore.csproj" Id="319f40ac-8963-4519-ace1-024d0d12003a" />
+</Solution>
