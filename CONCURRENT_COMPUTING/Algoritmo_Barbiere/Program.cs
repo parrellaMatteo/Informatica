@@ -39,17 +39,24 @@ namespace Algoritmo_Barbiere
             if(freeSeats>0)
             {
                 freeSeats--;
-                System.Console.WriteLine("Ho trovato posto e mi siedo");
+                System.Console.WriteLine($"ll cliente con il ThreadID = {Environment.CurrentManagedThreadId} Ho trovato posto e mi siedo");
                 //attendo che il barbiere mi faccia sedere sulla sedia di taglio
                 seatAccess.Release();//esco dalla sezione critica 
                 clientReady.Release();//seganlo al barbiere che sono pronto a tagliarmi i capelli
                 barberReady.Wait();//attendo che il barbiere mi tagli i capelli
-                
+                System.Console.WriteLine($"Sono il cliente con il ThreadID = {Environment.CurrentManagedThreadId} "+
+                    $". Il barbiere ha finito di tagliare i capelli" );
+            }
+            else
+            {
+                //se nn cè posto se ne va e lascia il locale
+                seatAccess.Release();//esco dalla sezione critica
+                System.Console.WriteLine($"Sono il cliente con il ThreadID = {Environment.CurrentManagedThreadId} "+
+                    $". Non ho trovato posto e vado via" );
             }
             //se cè posto si siede e attende la disponibilità del barbiere
             //Se non cè posto se ne va e lascia il locale
         }
-
         private static void BarberWork(object? obj)
         {
             while (true)
@@ -63,7 +70,7 @@ namespace Algoritmo_Barbiere
                 seatAccess.Release();//esco dalla sezione critica
                 //il barbiere taglia i capelli
                 System.Console.WriteLine("Il barbiere sta tagliando i capelli");
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 barberReady.Release();//il barbiere è di nuovo disponibile
             }
         }
