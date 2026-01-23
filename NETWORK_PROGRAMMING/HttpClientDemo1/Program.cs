@@ -15,7 +15,7 @@
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 await File.WriteAllTextAsync(Path.Combine(desktopPath, nameof(HttpClientDemo1) + ".html"), responseBody);
-                // Above three lines can be replaced with new helper method below
+                // Abohve three lines can be replaced with new helper method below
                 //string responseBody = await client.GetStringAsync(url);
                 //Console.WriteLine(responseBody);
             }
