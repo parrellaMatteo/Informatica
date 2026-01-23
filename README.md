@@ -26,7 +26,7 @@ Studio dei pattern non-bloccanti per l'ottimizzazione delle performance.
 ---
 
 ## 🛠️ Stack Tecnologico
-* **Linguaggi:** [Inserisci es. C, Java, Python o JavaScript]
+* **Linguaggi:** C#
 * **Ambiente:** Linux / VS Code
 * **Versioning:** Git per il tracciamento dei commit
 
@@ -40,7 +40,7 @@ Studio dei pattern non-bloccanti per l'ottimizzazione delle performance.
 ---
 
 ## 👤 Info
-* **Studente:** [Il Tuo Nome]
+* **Studente:** Matteo Parrella
 * **Percorso:** Informatica / Sistemi e Reti
 * **Ultimo aggiornamento:** Gennaio 2025
 
