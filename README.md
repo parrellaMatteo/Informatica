@@ -1,65 +1,48 @@
-# 💻 Appunti e Progetti di Informatica
+# 💻 Informatica Avanzata: Appunti e Progetti
 
-Benvenuti nella mia repository dedicata al mondo dell'informatica scolastica! Qui ho raccolto tutto il materiale studiato, le esercitazioni di laboratorio e i progetti finali.
-
----
-
-## 📂 Struttura della Cartella
-
-La cartella è organizzata per argomenti e anni scolastici per facilitare la navigazione:
-
-* **`01_Teoria/`**: Concetti fondamentali, architettura degli elaboratori, sistemi operativi e reti.
-* **`02_Algoritmi/`**: Diagrammi di flusso e logica di programmazione.
-* **`03_Linguaggi/`**:
-    * `C-CPP/`: Fondamenti di programmazione procedurale e OOP.
-    * `Web/`: HTML5, CSS3 e JavaScript.
-    * `Database/`: Progettazione ER e query SQL.
-* **`04_Progetti/`**: Lavori di gruppo e progetti di fine anno.
-* **`05_Verifiche/`**: Simulazioni e prove passate per il ripasso.
+Benvenuti nella mia repository di informatica. Questo spazio raccoglie tutto il materiale relativo alla programmazione di sistemi complessi, alla gestione delle reti e al calcolo parallelo.
 
 ---
 
-## 🛠️ Tecnologie e Strumenti Utilizzati
+## 📂 Struttura del Repository
 
-Durante il percorso ho approfondito l'uso di:
+La cartella principale è suddivisa in tre macro-aree tematiche, ognuna contenente diversi progetti e implementazioni:
 
-| Categoria | Strumenti |
-| :--- | :--- |
-| **Linguaggi** | C++, Java, SQL, Python |
-| **Web** | VS Code, Chrome DevTools |
-| **Database** | MySQL Workbench, phpMyAdmin |
-| **Versioning** | Git & GitHub |
+### ⚙️ [CONCURRENT_COMPUTING](./CONCURRENT_COMPUTING)
+Focus sulla gestione dei processi e dei thread.
+* **Argomenti:** Sincronizzazione, Semafori, Mutex, Deadlock e competizione per le risorse.
+* *Stato:* In aggiornamento (creazione cartelle programmazione).
 
----
+### 🌐 [NETWORK_PROGRAMMING](./NETWORK_PROGRAMMING)
+Progetti focalizzati sulla comunicazione tra sistemi distribuiti.
+* **Argomenti:** Socket (TCP/UDP), Modello Client-Server, Protocolli di rete e scambio dati.
+* *Stato:* Aggiunta nuovi file di implementazione.
 
-## 🚀 Progetti in primo piano
-
-### 🏆 [Nome Progetto 1]
-*Descrizione breve: un'applicazione per gestire i voti scolastici scritta in C++.*
-* **Cartella:** `./04_Progetti/GestoreVoti/`
-* **Keywords:** `Vettori`, `File I/O`, `Struct`.
-
-### 🌐 [Nome Progetto 2]
-*Descrizione breve: Sito web portfolio realizzato durante le ore di laboratorio.*
-* **Cartella:** `./03_Linguaggi/Web/Portfolio/`
-* **Keywords:** `Flexbox`, `Responsive Design`.
+### ⏳ [PROGRAMMAZIONE_ASINCRONA](./PROGRAMMAZIONE_ASINCRONA)
+Studio dei pattern non-bloccanti per l'ottimizzazione delle performance.
+* **Argomenti:** Callback, Promise, Async/Await, Event Loop e gestione degli I/O asincroni.
+* *Stato:* Aggiunta nuovi metodi e pattern.
 
 ---
 
-## 📝 Note per il ripasso (Cheat Sheet)
-
-> [!TIP]
-> **Ricorda:** Prima di compilare un file C++, assicurati di aver installato `g++` e di aver salvato le modifiche!
-
-* **Compilazione veloce:** `g++ main.cpp -o main`
-* **Esecuzione:** `./main`
+## 🛠️ Stack Tecnologico
+* **Linguaggi:** [Inserisci es. C, Java, Python o JavaScript]
+* **Ambiente:** Linux / VS Code
+* **Versioning:** Git per il tracciamento dei commit
 
 ---
 
-## 👤 Autore
-* **Nome:** [Il Tuo Nome]
-* **Classe:** [La Tua Classe]
-* **Anno Scolastico:** 2024/2025
+## 🚀 Come navigare i progetti
+1. Seleziona la cartella dell'argomento di tuo interesse.
+2. Ogni sottocartella contiene un file di codice sorgente e, dove presente, una breve documentazione specifica.
+3. Per i progetti di calcolo concorrente, fare riferimento ai commenti nel codice per le specifiche sulla sincronizzazione.
 
 ---
-*Fatto con ❤️ e tanto caffè durante le ore di laboratorio.*
+
+## 👤 Info
+* **Studente:** [Il Tuo Nome]
+* **Percorso:** Informatica / Sistemi e Reti
+* **Ultimo aggiornamento:** Gennaio 2025
+
+---
+*“First, solve the problem. Then, write the code.”*
