@@ -1,17 +1,17 @@
 ﻿//https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
+ 
 namespace HttpClientDemo2;
-
+ 
 class Program
 {
     /// <summary>
-    /// Scarica un file dalla rete e restituisce la lunghezza in byte
-    /// </summary>
-    /// <param name="url"></param>
-    /// <param name="client"></param>
-    /// <returns></returns>
+    /// Scarica un file dalla rete e restituisce la lunghezza in byte
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="client"></param>
+    /// <returns></returns>
     static async Task<int> ProcessURLAsync(string url, HttpClient client)
     {
         var sw = new Stopwatch();
@@ -22,12 +22,12 @@ class Program
         return byteArray.Length;
     }
     /// <summary>
-    /// Stampa una parte dell'url, la dimensione in byte di una pagina e il tempo impiegato per il download
-    /// </summary>
-    /// <param name="url"></param>
-    /// <param name="urlHeadingStrip"></param>
-    /// <param name="content"></param>
-    /// <param name="elapsedMillis"></param>
+    /// Stampa una parte dell'url, la dimensione in byte di una pagina e il tempo impiegato per il download
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="urlHeadingStrip"></param>
+    /// <param name="content"></param>
+    /// <param name="elapsedMillis"></param>
     static void DisplayResults(string url, string urlHeadingStrip, byte[] content, long elapsedMillis)
     {
         // Display the length of each website.
@@ -57,23 +57,30 @@ class Program
         return urls;
     }
     /// <summary>
-    /// Effettua il setup di una lista di url e per ognuno di essi avvia un download asincrono su un task separato
-    /// </summary>
-    /// <returns></returns>
+    /// Effettua il setup di una lista di url e per ognuno di essi avvia un download asincrono su un task separato
+    /// </summary>
+    /// <returns></returns>
     static async Task SumPageSizesAsync()
     {
         // Make a list of web addresses.
         List<string> urlList = SetUpURLList();
         //setup del client con eventuale Proxy
         HttpClient client = new();
-
+ 
         //misuriamo il tempo complessivo per scaricare tutte le pagine
         var swGlobal = new Stopwatch();
         swGlobal.Start();
         //processiamo in parallelo una lista di URL
         // Materializziamo subito per evitare enumerazioni multiple accidentali.
+ 
+ 
+        //ProcessURLAsync restituisce un Task<int> per ogni URL della lista
+        var mieiTask = urlList.Select(u => ProcessURLAsync(u, client)).ToList();
+        await Task.WhenAll(mieiTask);
+        await Task.WhenAny(mieiTask);
+        //devo attedere il completamento di tutti i task
         Task<int>[] downloadTasks = [.. urlList.Select(u => ProcessURLAsync(u, client))];
-
+ 
         //*****************************************************************************
         // //altro modo per processare in parallelo più attività è il seguente:
         // // ATTENZIONE: List<T> non è thread-safe. Usiamo un array indicizzato.
@@ -99,7 +106,7 @@ class Program
         // Console.WriteLine($"{Environment.NewLine}Total bytes returned (Parallel.ForEach): {totalParallelForEach}{Environment.NewLine}");
         // Await the completion of all the running tasks.
         //*****************************************************************************
-
+ 
         int[] lengths = await Task.WhenAll(downloadTasks);
         //// The previous line is equivalent to the following two statements.
         //Task<int[]> whenAllTask = Task.WhenAll(downloadTasks);
