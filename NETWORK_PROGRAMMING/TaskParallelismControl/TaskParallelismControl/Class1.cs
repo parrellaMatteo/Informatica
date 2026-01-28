@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
 namespace TaskParallelismControl
 {
     //Questa classe implementa metodi di estensione:
@@ -41,7 +36,7 @@ namespace TaskParallelismControl
             await Task.WhenAll(tasks);
         }
         public static async Task<ConcurrentBag<Tresult>> ExecuteInParallel<T, Tresult>(this IEnumerable<T> collection,
-                Func<T, Task<Tresult>> processor,
+                                           Func<T, Task<Tresult>> processor,
                                            int degreeOfParallelism)
         {
             //creo una coda Thrade-safe a partire dalla collection
