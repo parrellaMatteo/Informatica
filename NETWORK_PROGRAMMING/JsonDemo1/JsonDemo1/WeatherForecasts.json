@@ -1,0 +1,12 @@
+[
+  {
+    "Date": "2019-08-01T00:00:00+02:00",
+    "TemperatureCelsius": 25,
+    "Summary": "Hot"
+  },
+  {
+    "Date": "2019-08-02T00:00:00+02:00",
+    "TemperatureCelsius": 30,
+    "Summary": "Very Hot"
+  }
+]
