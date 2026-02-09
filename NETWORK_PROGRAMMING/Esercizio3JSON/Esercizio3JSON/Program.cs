@@ -1,24 +1,46 @@
-﻿using System.Net.Http.Json;
+﻿using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+ 
 internal class Program
 {
     private static async Task Main(string[] args)
     {
-        //crearere un oggetto http client
         HttpClient client = new()
         {
             BaseAddress = new Uri("https://dummyjson.com/")
         };
-
-        var Recipe=await client.GetFromJsonAsync<RecipeResponse>("recipes");
-        List<Recipe> recipes = Recipe?.Recipes?.Take(10).ToList() ?? new List<Recipe>();
-        //stampa delle ricette  nome ed ingredienti
-        foreach (var recipe in recipes)
+        RecipeResponse? recipeResponse = await client.GetFromJsonAsync<RecipeResponse>("/recipes");
+        List<Recipe>? recipes = recipeResponse?.Recipes.Take(10).ToList();
+        //definiamo il percorso dove andremo a salvare le immagini scaricate
+ 
+        var imageDirectory = Path.Combine(AppContext.BaseDirectory,"../../../","cachedPhotos");
+        Directory.CreateDirectory(imageDirectory);
+        Console.WriteLine(recipes);
+        //stampa delle ricette
+        if(recipes is not null)
         {
-            System.Console.WriteLine($"Recipe: {recipe.Name}");
-            System.Console.WriteLine("Ingredients:");
-            foreach (var ingredient in recipe.Ingredients ?? new List<string>())
+            foreach(var recipe in recipes)
             {
-                System.Console.WriteLine($"  - {ingredient}");
+                Console.WriteLine($"RICETTA : {recipe.Name}, TIPOLOGIA : {recipe.MealType}, DIFFICOLTA : {recipe.Difficulty}");
+                Console.WriteLine($"URL IMMAGINE : {recipe.Image}");
+                Console.WriteLine($"LISTA INGREDIENTI : ");
+                if(recipe.Ingredients is not null)
+                {
+                    foreach(var ingrediente in recipe.Ingredients)
+                    {
+                        Console.WriteLine(ingrediente);
+                    }
+                }
+                if(recipe.Image is not null)
+                {
+                    var fileName = GetFileNameFromUrl(recipe.Image);
+                    var filePath = Path.Combine(imageDirectory, fileName);
+                    if(!File.Exists(filePath))
+                    {
+                        await DownloadImageAsync(client, recipe.Image, filePath);
+                    }
+                }
             }
         }
     }
