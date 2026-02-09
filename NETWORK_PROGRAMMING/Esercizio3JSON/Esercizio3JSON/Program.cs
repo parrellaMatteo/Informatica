@@ -35,13 +35,31 @@ internal class Program
                 if(recipe.Image is not null)
                 {
                     var fileName = GetFileNameFromUrl(recipe.Image);
-                    var filePath = Path.Combine(imageDirectory, fileName);
+                    var filePath = Path.GetFullPath(Path.Combine(imageDirectory, fileName));
                     if(!File.Exists(filePath))
                     {
-                        await DownloadImageAsync(client, recipe.Image, filePath);
+                        await DownloadImage(client, recipe.Image, filePath);
                     }
                 }
             }
         }
+    }
+    private static string GetFileNameFromUrl(string url)
+    {
+        Uri baseUrl = new("http://qualsiasicosa");
+        if(!Uri.TryCreate(url, UriKind.Absolute, out Uri? uri))
+        {
+            uri = new Uri(baseUrl, url);
+        }
+        return Path.GetFileName(uri.LocalPath);
+    }
+
+    private static async Task DownloadImage(HttpClient client, string imageUrl, string filePath)
+    {
+        var request = await client.GetAsync(imageUrl);
+        request.EnsureSuccessStatusCode();
+        await using var httpStream = await request.Content.ReadAsStreamAsync();
+        await using var fileStream = File.Create(filePath);
+        await httpStream.CopyToAsync(fileStream);
     }
 }
