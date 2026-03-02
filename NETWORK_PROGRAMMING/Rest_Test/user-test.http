@@ -1,0 +1,41 @@
+### GET - Recupera tutti gli utenti
+GET https://jsonplaceholder.typicode.com/users
+
+### GET - Recupera un utente specifico
+GET https://jsonplaceholder.typicode.com/users/1
+
+### POST - Crea un nuovo utente
+POST https://jsonplaceholder.typicode.com/users
+Content-Type: application/json
+
+{
+  "name": "Mario Rossi",
+  "username": "mrossi",
+  "email": "mario.rossi@example.com",
+  "phone": "123-456-7890",
+  "website": "mariorossi.it"
+}
+
+### PUT - Aggiorna completamente un utente
+PUT https://jsonplaceholder.typicode.com/users/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Leanne Graham Modificata",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "phone": "1-770-736-8031 x56442",
+  "website": "hildegard.org"
+}
+
+### PATCH - Aggiorna parzialmente un utente
+PATCH https://jsonplaceholder.typicode.com/users/1
+Content-Type: application/json
+
+{
+  "email": "nuova.email@example.com"
+}
+
+### DELETE - Elimina un utente
+DELETE https://jsonplaceholder.typicode.com/users/1
