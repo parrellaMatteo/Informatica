@@ -1,0 +1,16 @@
+  {
+    "id": 1,
+    "name": "Kihn - Hessel",
+    "revenue": 96374198.79,
+    "headquarter": {
+      "lat": -51.3222,
+      "lon": 62.5117
+    },
+    "locations": [
+      {
+        "city": "Rathside",
+        "employee_number": 5823,
+        "state": "Montana"
+      }
+    ]
+  }
