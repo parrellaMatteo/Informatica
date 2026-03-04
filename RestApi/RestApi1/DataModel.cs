@@ -15,7 +15,12 @@ namespace RestApi1;
 
         [JsonPropertyName("company_id")]
         public long CompanyId { get; set; }
+
+    internal static object where(Func<object, bool> value)
+    {
+        throw new NotImplementedException();
     }
+}
     public class Company
     {
         [JsonPropertyName("id")]

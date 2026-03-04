@@ -54,7 +54,7 @@ public class ApiClient
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<List<Product>>("/products");
+            return await _httpClient.GetFromJsonAsync<List<Product>>("/products", _jsonOptions);
         }
         catch (HttpRequestException ex)
         {
@@ -67,12 +67,56 @@ public class ApiClient
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<Product>($"/products/{productId}");
+            return await _httpClient.GetFromJsonAsync<Product>($"/products/{productId}", _jsonOptions);
         }
         catch (HttpRequestException ex)
         {
             Console.WriteLine($"Errore nella richiesta: {ex.Message}");
             return null;
+        }
+    }
+
+    public async Task<Product?> CreateProductAsync(Product ilProdotto)
+    {
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync("/products", ilProdotto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Product>();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Errore nella richiesta: {ex.Message}");
+            return null;
+        }
+    }
+
+    internal async Task<Product?> UpdateProductAsync(long id, Product unProdotto)
+    {
+        try
+        {
+            var response = await _httpClient.PutAsJsonAsync($"/products/{id}", unProdotto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Product>();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Errore nella richiesta: {ex.Message}");
+            return null;
+        }
+    }
+
+    internal async Task<bool> DeleteProductAsync(long id)
+    {
+        try
+        {
+            var response = await _httpClient.DeleteAsync($"/products/{id}");
+            return response.IsSuccessStatusCode;
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Errore nella richiesta: {ex.Message}");
+            return false;
         }
     }
 }
