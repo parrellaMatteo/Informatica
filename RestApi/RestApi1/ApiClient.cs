@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using RestApi1;
 
@@ -117,6 +118,23 @@ public class ApiClient
         {
             Console.WriteLine($"Errore nella richiesta: {ex.Message}");
             return false;
+        }
+    }
+
+    internal async Task<Product>? PatchProductAsync(long id, object partialUpdate)
+    {
+        try
+        {
+            var jsonContent = JsonSerializer.Serialize(partialUpdate,_jsonOptions);
+            StringContent stringContent = new(jsonContent, Encoding.UTF8,"application/json");
+            var response = await _httpClient.PatchAsync($"/products/{id}", stringContent);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Product>();
+        }
+        catch(HttpRequestException ex)
+        {
+            Console.WriteLine($"Errore nella richiesta {ex.Message}");
+            return null;
         }
     }
 }

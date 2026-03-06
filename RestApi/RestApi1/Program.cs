@@ -52,6 +52,19 @@ internal class Program
                 Console.WriteLine($"Id: {prodottoAggiornato.Id}, Name: {prodottoAggiornato.Name}, Price: {prodottoAggiornato.Price}, CompanyId: {prodottoAggiornato.CompanyId}");
             }
         }
+        //test di aggiornamento di un prodotto tramite PATCH
+        System.Console.WriteLine("-----------------------------   PATCH");
+            if(unProdotto is not null)
+            {
+                var partialUpdate = new {Price = 127.11, Name = "Prodotto aggiornato tramite patch"};
+                var patchedProduct = await apiClient.PatchProductAsync(unProdotto.Id,partialUpdate);
+                if(patchedProduct is not null)
+                {
+                    Console.WriteLine("Il prodotto è stato aggiornato correttamente con la patch");
+                    Console.WriteLine($"Prodotto trovato: ID: {patchedProduct.Id}, Name: {patchedProduct.Name}, Price: {patchedProduct.Price}");
+    
+                }
+            }
         //test di cancellazione di un prodotto tramite DELETE
         System.Console.WriteLine("-----------------------------   DELETE");
         if (prodottoCreato is not null)
